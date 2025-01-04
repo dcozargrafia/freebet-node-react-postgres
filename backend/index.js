@@ -7,6 +7,10 @@ import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER, FRONTEND_URL, PORT
 const app = express();
 
 const pool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL || 'postgresql://freebet_db_bkri_user:wmVPq6fyclMBzQpzNGjPUGonzZQiJYvJ@dpg-cts9ult2ng1s73bvl3lg-a.frankfurt-postgres.render.com/freebet_db_bkri',
+    ssl: {
+        rejectUnauthorized: false
+    },
     host: DB_HOST,
     database: DB_DATABASE,
     user: DB_USER,
