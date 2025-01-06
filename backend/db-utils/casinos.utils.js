@@ -1,8 +1,9 @@
-// backend/db-utils/transactions.utils.js
+// backend/db-utils/casinos.utils.js
 import { existsBookmakerId } from './bookmakers.utils.js';
-import { validateDate } from './date.utils.js'
+import { validateDate } from './date.utils.js';
 
-export const validateTransactionData = async (data) => {
+
+export const validateCasinosData = async (data) => {
     const errors = [];
 
     for (const [field, value] of Object.entries(data)) {
@@ -20,17 +21,9 @@ export const validateTransactionData = async (data) => {
                 }
                 break;
             
-            case 'type':
-                if (!['deposit', 'withdrawal'].includes(value)) {
-                    errors.push('The "type" field must be either "deposit" or "withdrawal".')
-                }
-                break;
-            
             case 'amount':
-                if (typeof value !== 'number' ||
-                    value < 0 ||
-                    !/^\d+(\.\d{1,2})?$/.test(String(value))) {
-                    errors.push('The "amount" field must be a number >= 0 and with up to 2 decimal places.')
+                if (typeof value !== 'number') {
+                    errors.push('The "amount" field must be a number')
                     }
                 break;
 

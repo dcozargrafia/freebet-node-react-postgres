@@ -39,25 +39,33 @@ export const getBookmakerById = async (req, res) => {
     }
 };
 
+
+
 // Creates a new Bookmaker
 export const createBookmaker = async (req, res) => {
     try {
-        const validationErrors = validateBookmakerData(req.body);
+        // Convert strings to numbers when necessary
+        const requestData = { ...req.body };
+        if (requestData.initial_balance) requestData.initial_balance = Number(requestData.initialBalance);
+        if (requestData.adjustment) requestData.adjustment = Number(requestData.adjustment);
+        if (requestData.commission) requestData.commission = Number(requestData.commission);
 
+        // Validate data
+        const validationErrors = validateBookmakerData(requestData);
         if (validationErrors.length > 0) {
             return res.status(400).json({ errors: validationErrors });
         }
 
         const { 
             name, 
-            initialBalance, 
+            initial_balance, 
             adjustment, 
             username, 
             password, 
             type, 
             commission,
             info 
-        } = req.body;
+        } = requestData;
 
         const sql = `
             INSERT INTO bookmakers 
@@ -68,7 +76,7 @@ export const createBookmaker = async (req, res) => {
 
         const { rows } = await runQuery(sql, [
             name, 
-            initialBalance, 
+            initial_balance, 
             adjustment, 
             username, 
             password, 
@@ -88,6 +96,7 @@ export const createBookmaker = async (req, res) => {
 };
 
 
+
 // Updates a specific bookmaker by its id
 export const updateBookmaker = async (req, res) => {
     try {
@@ -100,7 +109,7 @@ export const updateBookmaker = async (req, res) => {
         }
 
         // Convert strings to numbers when necessary
-        if (updateData.initialBalance) updateData.initialBalance = Number(updateData.initialBalance);
+        if (updateData.initial_balance) updateData.initial_balance = Number(updateData.initial_balance);
         if (updateData.adjustment) updateData.adjustment = Number(updateData.adjustment);
         if (updateData.commission) updateData.commission = Number(updateData.commission);
 
@@ -126,7 +135,7 @@ export const updateBookmaker = async (req, res) => {
 
         const { rows, rowCount } = await runQuery(sql, [
             updateData.name,
-            updateData.initialBalance,
+            updateData.initial_balance,
             updateData.adjustment,
             updateData.username,
             updateData.password,
@@ -145,7 +154,7 @@ export const updateBookmaker = async (req, res) => {
             updatedBookmaker: rows[0]
         });
     } catch (error) {
-        console.error('Error updating bookmaker:', error.message);
+        console.error(`Error updating bookmaker: ${id}.`, error.message);
         res.status(500).json({ error: error.message });
     }
 };
@@ -173,7 +182,7 @@ export const deleteBookmaker = async (req, res) => {
             deletedBookmaker: rows[0],
         });
     } catch (error) {
-        console.error('Error deleting bookmaker:', error.message);
+        console.error(`Error deleting bookmaker: ${id}`, error.message);
         res.status(500).json({ error: error.message });
     }
 };

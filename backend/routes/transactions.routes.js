@@ -5,6 +5,8 @@ import {
     getTransactions,
     getTransactionById,
     createTransaction,
+    deleteTransaction,
+    updateTransaction,
     } 
     from '../controllers/transactions.controller.js'
 
@@ -20,8 +22,8 @@ router.get('/:id', getTransactionById);
 
 router.post('/', createTransaction);
 
-// router.put('/:id', updateBookmaker);
+router.put('/:id', updateTransaction);
 
-// router.delete('/:id', deleteBookmaker);
+router.delete('/:id', deleteTransaction);
 
 export default router;

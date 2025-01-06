@@ -24,9 +24,9 @@ export const validateBookmakerData = (data) => {
                 }
                 break;
 
-            case 'initialBalance':
+            case 'initial_balance':
                 if (typeof value !== 'number' || value < 0) {
-                    errors.push('The "initialBalance" field must be a number greater than or equal to 0.');
+                    errors.push('The "initial_balance" field must be a number greater than or equal to 0.');
                 }
                 break;
 
