@@ -1,7 +1,7 @@
 // backend/controllers/bookmakers.controller.js
 
-import { validateBookmakerData } from '../db-utils/bookmakers.utils.js';
-import { getRows, runQuery } from '../db-utils/db.utils.js';
+import { validateBookmakerData } from '../utils/bookmakers.utils.js';
+import { getRows, runQuery } from '../utils/db.utils.js';
 
 // Gets all bookmakers
 export const getBookmakers = async (req, res) => {

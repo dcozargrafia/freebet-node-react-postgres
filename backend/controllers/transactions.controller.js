@@ -1,8 +1,8 @@
 // backend/controllers/transactions.controller.js
 
-import { validateAndFormatDate } from '../db-utils/date.utils.js';
-import { getRows, runQuery } from '../db-utils/db.utils.js';
-import { validateTransactionData } from '../db-utils/transactions.utils.js';
+import { validateAndFormatDate } from '../utils/date.utils.js';
+import { getRows, runQuery } from '../utils/db.utils.js';
+import { validateTransactionData } from '../utils/transactions.utils.js';
 
 
 
@@ -76,7 +76,7 @@ export const createTransaction = async (req, res) => {
         } = requestData;
 
         const sql = `
-            INSERT INTO transactions 
+            INSERT INTO transactions (date, bookmaker_id, type, amount, info)
             VALUES ($1, $2, $3, $4, $5) 
             RETURNING *;
         `;
@@ -117,11 +117,11 @@ export const updateTransaction = async (req, res) => {
 
         // Validate and format date
         if (updateData.date) {
-            const dateValidation = validateAndFormatDate(requestData.date);
+            const dateValidation = validateAndFormatDate(updateData.date);
             if (!dateValidation.isValid) {
                 return res.status(400).json({ error: dateValidation.error });
             }
-            requestData.date = dateValidation.formattedDate;
+            updateData.date = dateValidation.formattedDate;
         }
 
         // Validate data

@@ -1,8 +1,8 @@
 // backend/controllers/casinos.controller.js
 
-import { validateCasinosData } from '../db-utils/casinos.utils.js';
-import { validateAndFormatDate } from '../db-utils/date.utils.js';
-import { getRows, runQuery } from '../db-utils/db.utils.js';
+import { validateCasinosData } from '../utils/casinos.utils.js';
+import { validateAndFormatDate } from '../utils/date.utils.js';
+import { getRows, runQuery } from '../utils/db.utils.js';
 
 
 
