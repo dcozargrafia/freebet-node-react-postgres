@@ -34,7 +34,7 @@ export const getBookmakerById = async (req, res) => {
 
         res.status(200).json(bookmaker[0]);
     } catch (error) {
-        console.error('Error obtaining bookmaker with id:', error.message);
+        console.error(`Error obtaining bookmaker with id: ${id}`, error.message);
         res.status(500).json({ error: error.message });
     }
 };

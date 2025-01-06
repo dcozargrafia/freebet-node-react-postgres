@@ -1,5 +1,18 @@
 // backend/db-utils/bookmakers.utils.js
 
+import { runQuery } from './db.utils.js'; 
+
+
+// Checks if it exists a bookmaker with a specific id
+export const existsBookmakerId = async (id) => {
+    const sql = 'SELECT COUNT(*) FROM bookmakers WHERE id = $1'; 
+    
+    const { rows } = await runQuery(sql, [id]);
+    return rows[0].count > 0; 
+};
+
+
+
 export const validateBookmakerData = (data) => {
     const errors = [];
     

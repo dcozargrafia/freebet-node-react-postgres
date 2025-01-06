@@ -1,14 +1,12 @@
 // backend/routes/transactions.routes.js
 
 import { Router } from 'express';
-// import { 
-//     getBookmakers, 
-//     getBookmakerById,
-//     createBookmaker,
-//     deleteBookmaker,
-//     updateBookmaker,
-//     } 
-//     from '../controllers/transactions.controller.js'
+import { 
+    getTransactions,
+    getTransactionById,
+    createTransaction,
+    } 
+    from '../controllers/transactions.controller.js'
 
 
 const router = Router();
@@ -18,9 +16,9 @@ const router = Router();
 
 router.get('/', getTransactions);
 
-// router.get('/:id', getBookmakerById);
+router.get('/:id', getTransactionById);
 
-// router.post('/', createBookmaker);
+router.post('/', createTransaction);
 
 // router.put('/:id', updateBookmaker);
 
