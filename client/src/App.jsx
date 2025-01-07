@@ -2,12 +2,14 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Typography } from '@mui/material';
-import Bets from './components/Bets';
-import Bookmakers from './components/Bookmakers';
-import Casinos from './components/Casinos';
-import Transactions from './components/Transactions';
+import BetsPage from './components/pages/BetsPage';
+import BookmakersPage from './components/pages/BookmakersPage';
+import CasinosPage from './components/pages/CasinosPage';
+import TransactionsPage from './components/pages/TransactionsPage';
+
 
 import './App.css';
+
 
 
 const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
@@ -32,10 +34,10 @@ function App() {
 
         <Routes>
 
-          <Route path="/bets" element={<Bets />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/bookmakers" element={<Bookmakers />} />
-          <Route path="/casinos" element={<Casinos />} />
+          <Route path="/bets" element={<BetsPage />} />
+          <Route path="/transactions" element={<TransactionsPage />} />
+          <Route path="/bookmakers" element={<BookmakersPage />} />
+          <Route path="/casinos" element={<CasinosPage />} />
         </Routes>
       </div>
     </Router>

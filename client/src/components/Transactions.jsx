@@ -1,24 +1,11 @@
 // Transactions.jsx
-import { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import { formatDate } from '../utils/date-utils';
+// import { formatDate } from '../utils/date-utils';
 
 
 const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
 
-function Transactions() {
-  const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`${URL}/transactions`);
-      const data = await res.json();
-      setTransactions(data);
-    };
-    
-    fetchData();
-  }, []);
-
+function Transactions({ transactions }) {
   return (
     <div>
         <Typography variant="h5" gutterBottom>
@@ -32,6 +19,7 @@ function Transactions() {
                 <TableCell>Fecha</TableCell>
                 <TableCell>Casa</TableCell>
                 <TableCell>Importe</TableCell>
+                <TableCell>Tipo</TableCell>
                 <TableCell>Info</TableCell>
             </TableRow>
             </TableHead>
@@ -42,6 +30,7 @@ function Transactions() {
                 <TableCell>{formatDate(transaction.date)}</TableCell>
                 <TableCell>{transaction.bookmaker_id}</TableCell>
                 <TableCell>{transaction.amount}</TableCell>
+                <TableCell>{transaction.type}</TableCell>
                 <TableCell>{transaction.info}</TableCell>
                 </TableRow>
             ))}
