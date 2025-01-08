@@ -4,7 +4,7 @@ import { CircularProgress, Button, Dialog, DialogActions, DialogContent, DialogT
 import TransactionsTable from '../tables/TransactionsTable';
 import NavBar from '../common/NavBar';
 import TransactionForm from '../forms/TransactionForm';
-import { useBookmakers } from '../../hooks/useBookmakers'; // Importa tu hook personalizado
+import { useBookmakers } from '../../hooks/useBookmakers'; 
 
 const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
 

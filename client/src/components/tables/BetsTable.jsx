@@ -108,6 +108,22 @@ const BetsTable = ({ data, onDataChange }) => {
         return formatDate(row.event_date);
       case 'bookmaker_id':
         return getBookmakerName(row.bookmaker_id);
+      case 'status':
+        if (row.status === 'pending') return 'Pendiente';
+        if (row.status === 'won') return 'Ganada';
+        if (row.status === 'lost') return 'Perdida';
+      case 'extra': 
+        switch (row.extra) {
+          case 'dorada': return 'Dorada';
+          case 'plateada': return 'Plateada';
+          case 'superaumento': return 'Super Aumento';
+          case '25% aumento': return '25%';
+          case '30% aumento': return '30%';
+          case 'aumento cuota': return 'Aumento Cuota';
+          case 'flash': return 'Flash';
+          case 'profit boost': return 'Profit Boost';
+          default: return '';
+        }
       default:
         return row[columnId];
     }
