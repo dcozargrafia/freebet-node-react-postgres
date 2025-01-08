@@ -1,7 +1,8 @@
-// CasinosPage.jsx
+// BetsPage.jsx
 import { useState, useEffect } from 'react';
 import BetsTable from '../tables/BetsTable';
 import { CircularProgress } from '@mui/material';
+import NavBar from '../common/NavBar';
 
 
 const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
@@ -33,10 +34,13 @@ const BetsPage = () => {
       {loading ? (
         <CircularProgress />
       ) : (
-        <BetsTable 
-          data={data} 
-          onDataChange={fetchData} // Pasamos la función para refrescar los datos
-        />
+        <>
+          <NavBar />
+          <BetsTable 
+            data={data} 
+            onDataChange={fetchData} // Pasamos la función para refrescar los datos
+          />
+        </>
       )}
     </div>
   );

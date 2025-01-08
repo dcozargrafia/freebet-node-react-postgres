@@ -1,6 +1,6 @@
-// BookmakersPage.jsx
+// TransactionsPage.jsx
 import { useState, useEffect } from 'react';
-import BookmakersTable from '../tables/BookmakersTable';
+import TransactionsTable from '../tables/TransactionsTable';
 import { CircularProgress } from '@mui/material';
 import NavBar from '../common/NavBar';
 
@@ -8,14 +8,14 @@ import NavBar from '../common/NavBar';
 const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
 
 
-const BookmakersPage = () => {
+const TransactionsPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${URL}/bookmakers`);
+      const response = await fetch(`${URL}/transactions`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -36,7 +36,7 @@ const BookmakersPage = () => {
       ) : (
         <>
           <NavBar />
-          <BookmakersTable 
+          <TransactionsTable 
             data={data} 
             onDataChange={fetchData} // Pasamos la función para refrescar los datos
           />
@@ -47,4 +47,4 @@ const BookmakersPage = () => {
 };
 
 
-export default BookmakersPage;
+export default TransactionsPage;

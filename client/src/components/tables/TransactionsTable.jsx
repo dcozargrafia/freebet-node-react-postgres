@@ -83,12 +83,12 @@ const TransactionsTable = ({ data, onDataChange }) => {
   ];
 
   const columns = [
-    { id: 'id', label: 'ID', width: '5%', align: 'center' },
-    { id: 'date', label: 'Fecha', width: '10%', align: 'center' },
-    { id: 'bookmaker_id', label: 'Casa de apuestas', width: '30%', align: 'center' },
-    { id: 'type', label: 'Tipo', width: '10%', align: 'center' },
-    { id: 'amount', label: 'Cantidad', width: '8%', align: 'center' },
-    { id: 'info', label: 'Información', width: '20%', align: 'center' }
+    { id: 'id', label: 'ID', width: '2%', align: 'center' },
+    { id: 'date', label: 'Fecha', width: '5%', align: 'center' },
+    { id: 'bookmaker_id', label: 'Casa de apuestas', width: '15%', align: 'center' },
+    { id: 'type', label: 'Tipo', width: '5%', align: 'center' },
+    { id: 'amount', label: 'Cantidad', width: '5%', align: 'center' },
+    { id: 'info', label: 'Información', width: '15%', align: 'center' }
   ];
 
   const renderCell = (row, columnId) => {

@@ -9,7 +9,7 @@ export const validateTransactionData = async (data) => {
         switch (field) {
             case 'date': 
                 const dateError = validateDate(value, { 
-                    allowFuture: false,
+                    allowFuture: true,
                 });
                 if (dateError) errors.push(dateError);
                 break;

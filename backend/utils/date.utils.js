@@ -27,6 +27,7 @@ export const isNotFutureDate = (dateStr) => {
     const inputDate = new Date(dateStr);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    inputDate.setHours(0, 0, 0, 0);
     return inputDate <= today;
 };
 

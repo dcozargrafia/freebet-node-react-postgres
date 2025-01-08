@@ -28,16 +28,16 @@ const DataTable = ({
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       {title && (
-        <Typography variant="h6" sx={{ p: 2 }}>
+        <Typography variant="h6" sx={{ p: 2 }} align="center">
           {title}
         </Typography>
       )}
       <TableContainer>
         <Table 
           sx={{ minWidth: 650 }} 
-          size="small" 
+          size="normal" 
           padding="checkbox"
-          stickyHeader="true"
+          stickyHeader={true}
         >
           <TableHead>
             <TableRow>
@@ -46,6 +46,7 @@ const DataTable = ({
                   key={column.id}
                   align={column.align}
                   sx={{ width: column.width }}
+                  padding='normal'
                 >
                   {column.label}
                 </TableCell>
@@ -60,7 +61,7 @@ const DataTable = ({
           </TableHead>
           <TableBody>
             {paginatedData.map((row) => (
-              <TableRow key={row.id} hover="true">
+              <TableRow key={row.id} hover={true}>
                 {columns.map((column) => (
                   <TableCell key={`${row.id}-${column.id}`} align={column.align}>
                     {renderCell(row, column.id)}

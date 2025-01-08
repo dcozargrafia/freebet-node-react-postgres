@@ -81,11 +81,11 @@ const BookmakersTable = ({ data, onDataChange }) => {
   ];
 
   const columns = [
-    { id: 'id', label: 'ID', width: '5%', align: 'center' },
-    { id: 'name', label: 'Nombre', width: '30%', align: 'center' },
-    { id: 'type', label: 'Tipo', width: '10%', align: 'center' },
-    { id: 'commission', label: 'Comisión', width: '5%', align: 'center'},
-    { id: 'info', label: 'Información', width: '30%', align: 'center' }
+    { id: 'id', label: 'ID', width: '2%', align: 'center' },
+    { id: 'name', label: 'Nombre', width: '15%', align: 'center' },
+    { id: 'type', label: 'Tipo', width: '5%', align: 'center' },
+    { id: 'commission', label: 'Comisión', width: '2%', align: 'center'},
+    { id: 'info', label: 'Información', width: '15%', align: 'center' }
   ];
 
   const renderCell = (row, columnId) => {

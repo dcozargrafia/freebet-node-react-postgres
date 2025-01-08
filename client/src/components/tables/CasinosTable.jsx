@@ -86,7 +86,7 @@ const CasinosTable = ({ data, onDataChange }) => {
     { id: 'id', label: 'ID', width: '5%', align: 'center' },
     { id: 'date', label: 'Fecha', width: '10%', align: 'center' },
     { id: 'bookmaker_id', label: 'Casa de apuestas', width: '30%', align: 'center' },
-    { id: 'amount', label: 'Cantidad', width: '8%', align: 'center' },
+    { id: 'amount', label: 'Importe', width: '8%', align: 'center' },
     { id: 'info', label: 'Información', width: '20%', align: 'center' }
   ];
 
