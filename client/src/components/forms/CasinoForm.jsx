@@ -1,6 +1,6 @@
 // components/CasinoForm.jsx
-import { useState } from 'react';
-import { TextField, Button, Typography, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { TextField, Button, Typography, Select, MenuItem, FormControl, InputLabel, Autocomplete } from '@mui/material';
 import { formatDateToBackend } from '../../utils/date-utils';
 
 function CasinoForm({ onAddCasino, bookmakers }) {
@@ -8,6 +8,15 @@ function CasinoForm({ onAddCasino, bookmakers }) {
   const [date, setDate] = useState('');
   const [bookmakerId, setBookmakerId] = useState('');
   const [info, setInfo] = useState('');
+
+
+  const dateInputRef = useRef(null);
+  
+  useEffect(() => {
+    if (dateInputRef.current) {
+      dateInputRef.current.focus()
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,22 +51,23 @@ function CasinoForm({ onAddCasino, bookmakers }) {
         type="date"
         InputLabelProps={{ shrink: true }}
         required
+        inputRef={dateInputRef}
       />
-      <FormControl variant="outlined" required>
-        <InputLabel id="bookmaker-select-label">Bookmaker</InputLabel>
-        <Select
-          labelId="bookmaker-select-label"
-          value={bookmakerId}
-          onChange={(e) => setBookmakerId(e.target.value)}
-          label="Casa de apuestas"
-        >
-          {bookmakers.map((bookmaker) => (
-            <MenuItem key={bookmaker.id} value={bookmaker.id}>
-              {bookmaker.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Autocomplete
+        options={bookmakers}
+        getOptionLabel={(option) => option.name}
+        value={bookmakers.find((bookmaker) => bookmaker.id === bookmakerId) || null}
+        onChange={(event, newValue) => {
+          setBookmakerId(newValue ? newValue.id : '');
+        }}
+        renderInput={(params) => <TextField 
+                                    {...params} 
+                                    label="Casa de apuestas" 
+                                    variant="outlined" 
+                                    required  
+                                  />}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
+      />
       <TextField
         label="Importe"
         variant="outlined"

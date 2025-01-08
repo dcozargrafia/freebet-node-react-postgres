@@ -85,7 +85,12 @@ const BookmakersTable = ({ data, onDataChange }) => {
     { id: 'name', label: 'Nombre', width: '15%', align: 'center' },
     { id: 'type', label: 'Tipo', width: '5%', align: 'center' },
     { id: 'commission', label: 'Comisión', width: '2%', align: 'center'},
-    { id: 'info', label: 'Información', width: '15%', align: 'center' }
+    { id: 'initial_balance', label: 'Saldo inicial', width: '2%', align: 'center'},
+    { id: 'adjustment', label: 'Ajuste', width: '2%', align: 'center'},
+    { id: 'username', label: 'Nombre usuario', width: '8%', align: 'center' },
+    { id: 'password', label: 'Password', width: '8%', align: 'center' },
+    { id: 'info', label: 'Información', width: '10%', align: 'center' },
+
   ];
 
   const renderCell = (row, columnId) => {

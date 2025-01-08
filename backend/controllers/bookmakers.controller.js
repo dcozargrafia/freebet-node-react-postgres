@@ -46,7 +46,7 @@ export const createBookmaker = async (req, res) => {
     try {
         // Convert strings to numbers when necessary
         const requestData = { ...req.body };
-        if (requestData.initial_balance) requestData.initial_balance = Number(requestData.initialBalance);
+        if (requestData.initial_balance) requestData.initial_balance = Number(requestData.initial_balance);
         if (requestData.adjustment) requestData.adjustment = Number(requestData.adjustment);
         if (requestData.commission) requestData.commission = Number(requestData.commission);
 

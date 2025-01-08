@@ -1,5 +1,4 @@
-// components/common/DataTable.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,9 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton';
 
 const DataTable = ({
   title,
@@ -22,8 +22,26 @@ const DataTable = ({
   onRowsPerPageChange,
   actions
 }) => {
-  // Filtrar datos para la página actual
-  const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('');
+
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const sortedData = [...data].sort((a, b) => {
+    if (b[orderBy] < a[orderBy]) {
+      return order === 'asc' ? -1 : 1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return order === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
+
+  const paginatedData = sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -33,12 +51,7 @@ const DataTable = ({
         </Typography>
       )}
       <TableContainer>
-        <Table 
-          sx={{ minWidth: 650 }} 
-          size="normal" 
-          padding="checkbox"
-          stickyHeader={true}
-        >
+        <Table sx={{ minWidth: 650 }} size="normal" padding="checkbox" stickyHeader={true}>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -47,16 +60,22 @@ const DataTable = ({
                   align={column.align}
                   sx={{ width: column.width }}
                   padding='normal'
+                  sortDirection={orderBy === column.id ? order : false}
                 >
-                  {column.label}
+                  <TableSortLabel
+                    active={orderBy === column.id}
+                    direction={orderBy === column.id ? order : 'asc'}
+                    onClick={() => handleRequestSort(column.id)}
+                  >
+                    {column.label}
+                  </TableSortLabel>
                 </TableCell>
               ))}
-              {actions && 
-                <TableCell 
-                  align="center"
-                >
+              {actions && (
+                <TableCell align="center">
                   Acciones
-                </TableCell>}
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -68,20 +87,20 @@ const DataTable = ({
                   </TableCell>
                 ))}
                 {actions && (
-                <TableCell align="center">
-                  {actions.map((action) => (
-                    <IconButton
-                      key={action.name}
-                      onClick={() => action.onClick(row)}
-                      color={action.color || "primary"}
-                      size="small"
-                      title={action.name}
-                    >
-                      {action.icon}
-                    </IconButton>
-                  ))}
-                </TableCell>
-              )}
+                  <TableCell align="center">
+                    {actions.map((action) => (
+                      <IconButton
+                        key={action.name}
+                        onClick={() => action.onClick(row)}
+                        color={action.color || "primary"}
+                        size="small"
+                        title={action.name}
+                      >
+                        {action.icon}
+                      </IconButton>
+                    ))}
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>
